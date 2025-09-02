@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="calculate average speed" />
+    <title>Average Speed Calculator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="container">
+      <nav>
+        <ul>
+          <li><a href="index.html">TripWise Tools</a></li>
+        </ul>
+        <ul>
+          <li><a href="average-speed.html">Average Speed</a></li>
+          <li><a href="eta.html">ETA</a></li>
+          <li><a href="fuel-cost.html">Fuel Cost</a></li>
+          <li><a href="itinerary-cost.html">Itinerary Cost</a></li>
+        </ul>
+      </nav>
+      <hgroup>
+        <h1>Average Speed Calculator</h1>
+      </hgroup>
+    </header>
+    <main class="container">
+      <section>
+        <div>
+          <label>Distance (km):</label>
+          <input type="number" id="distance" required />
+
+          <label>Time (hours):</label>
+          <input type="number" id="time" required />
+
+          <button id="calculateBtn" type="button">Calculate Speed</button>
+        </div>
+      </section>
+      <section>
+        <p id="speedResult"></p>
+      </section>
+    </main>
+    <footer class="container neog-footer">
+      <small>
+        go from zero to hero at full stack development with
+        <a href="https://neog.camp">neog.camp</a>
+      </small>
+    </footer>
+    <script>
+      function calculateAverageSpeed() {
+        const distanceElement = document.getElementById("distance");
+        const timeElement = document.getElementById("time");
+        const resultElement = document.getElementById("speedResult");
+
+        const distanceInKms = distanceElement.value;
+        const timeInHours = timeElement.value;
+
+        const speed = distanceInKms / timeInHours;
+        const finalSpeed = speed.toFixed(2);
+
+        resultElement.innerText = "Average Speed: " + finalSpeed + " km/h";
+      }
+
+      const calculateBtnElement = document.getElementById("calculateBtn");
+      calculateBtnElement.addEventListener("click", calculateAverageSpeed);
+    </script>
+  </body>
+</html>

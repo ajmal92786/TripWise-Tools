@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="calculate estimated time of arrival based on distance and speed"
+    />
+    <title>ETA Calculator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="container">
+      <nav>
+        <ul>
+          <li><a href="index.html">TripWise Tools</a></li>
+        </ul>
+        <ul>
+          <li><a href="average-speed.html">Average Speed</a></li>
+          <li><a href="eta.html">ETA</a></li>
+          <li><a href="fuel-cost.html">Fuel Cost</a></li>
+          <li><a href="itinerary-cost.html">Itinerary Cost</a></li>
+        </ul>
+      </nav>
+      <hgroup>
+        <h1>ETA Calculator</h1>
+      </hgroup>
+    </header>
+    <main class="container">
+      <section>
+        <div>
+          <label>Distance (km):</label>
+          <input type="number" id="distance" required />
+
+          <label>Speed (km/h):</label>
+          <input type="number" id="speed" required />
+
+          <button id="calculateBtn" type="button">Calculate ETA</button>
+        </div>
+      </section>
+      <section>
+        <p id="etaResult"></p>
+      </section>
+    </main>
+    <footer class="container neog-footer">
+      <small>
+        go from zero to hero at full stack development with
+        <a href="https://neog.camp">neog.camp</a>
+      </small>
+    </footer>
+    <script>
+      function calculateEta() {
+        const distanceElement = document.getElementById("distance");
+        const speedElement = document.getElementById("speed");
+        const resultElement = document.getElementById("etaResult");
+
+        const distanceInKms = parseFloat(distanceElement.value);
+        const speedInKms = parseFloat(speedElement.value);
+
+        const eta = distanceInKms / speedInKms;
+        const finalEta = eta.toFixed(2);
+
+        resultElement.innerText =
+          "Estimated Time of Arrival: " + finalEta + " hours";
+      }
+
+      const calculateBtnElement = document.getElementById("calculateBtn");
+      calculateBtnElement.addEventListener("click", calculateEta);
+    </script>
+  </body>
+</html>

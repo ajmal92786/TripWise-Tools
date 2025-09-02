@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="calculate your itinerary cost based on transport cost, hotel type, food cost, and activities cost."
+    />
+    <title>Itinerary Cost Estimator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="container">
+      <nav>
+        <ul>
+          <li><a href="index.html">TripWise Tools</a></li>
+        </ul>
+        <ul>
+          <li><a href="average-speed.html">Average Speed</a></li>
+          <li><a href="eta.html">ETA</a></li>
+          <li><a href="fuel-cost.html">Fuel Cost</a></li>
+          <li><a href="itinerary-cost.html">Itinerary Cost</a></li>
+        </ul>
+      </nav>
+      <hgroup>
+        <h1>Itinerary Cost Estimator</h1>
+      </hgroup>
+    </header>
+    <main class="container">
+      <section>
+        <div>
+          <label>Transport Cost:</label>
+          <input type="number" id="transport-cost" required />
+          <label>Hotel Type:</label>
+          <select id="hotel-type">
+            <option value="budget">Budget</option>
+            <option value="standard">Standard</option>
+            <option value="luxury">Luxury</option>
+          </select>
+          <label>Food Cost:</label>
+          <input type="number" id="food-cost" required />
+          <label>Activities Cost:</label>
+          <input type="number" id="activities-cost" required />
+
+          <button id="calculateBtn" type="button">Calculate Total</button>
+        </div>
+      </section>
+      <section>
+        <p id="result"></p>
+      </section>
+    </main>
+    <footer class="container neog-footer">
+      <small>
+        go from zero to hero at full stack development with
+        <a href="https://neog.camp">neog.camp</a>
+      </small>
+    </footer>
+    <script>
+      function getHotelCost(hotelType) {
+        if (hotelType === "budget") {
+          return 1000;
+        } else if (hotelType === "standard") {
+          return 2500;
+        } else {
+          return 3000;
+        }
+      }
+
+      function calculateTotal() {
+        const transportCostElement = document.getElementById("transport-cost");
+        const foodCostElement = document.getElementById("food-cost");
+        const activitiesCostElement =
+          document.getElementById("activities-cost");
+        const hotelTypeElement = document.getElementById("hotel-type");
+        const resultElement = document.getElementById("result");
+
+        const transportCost = parseFloat(transportCostElement.value);
+        const foodCost = parseFloat(foodCostElement.value);
+        const activitiesCost = parseFloat(activitiesCostElement.value);
+        const hotelType = hotelTypeElement.value;
+
+        const hotelCost = getHotelCost(hotelType);
+
+        const totalCost = transportCost + hotelCost + foodCost + activitiesCost;
+
+        resultElement.innerText =
+          "Total Trip Cost: ₹" +
+          totalCost.toFixed(2) +
+          " (Hotel cost: ₹" +
+          hotelCost +
+          ")";
+      }
+
+      const calculateBtnElement = document.getElementById("calculateBtn");
+      calculateBtnElement.addEventListener("click", calculateTotal);
+    </script>
+  </body>
+</html>

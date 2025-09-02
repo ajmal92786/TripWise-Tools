@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="calculate fuel cost based on distance, fuel efficiency and fuel price"
+    />
+    <title>Fuel Cost Calculator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="container">
+      <nav>
+        <ul>
+          <li><a href="index.html">TripWise Tools</a></li>
+        </ul>
+        <ul>
+          <li><a href="average-speed.html">Average Speed</a></li>
+          <li><a href="eta.html">ETA</a></li>
+          <li><a href="fuel-cost.html">Fuel Cost</a></li>
+          <li><a href="itinerary-cost.html">Itinerary Cost</a></li>
+        </ul>
+      </nav>
+      <hgroup>
+        <h1>Fuel Cost Calculator</h1>
+      </hgroup>
+    </header>
+    <main class="container">
+      <section>
+        <div>
+          <label>Distance (km):</label>
+          <input type="number" id="distance" required />
+
+          <label>Fuel Efficiency (km/l):</label>
+          <input type="number" id="fuel-efficiency" required />
+
+          <label>Fuel Price (per litre):</label>
+          <input type="number" id="fuel-price" required />
+
+          <button id="calculateBtn" type="button">Calculate Cost</button>
+        </div>
+      </section>
+      <section>
+        <p id="costResult"></p>
+      </section>
+    </main>
+    <footer class="container neog-footer">
+      <small>
+        go from zero to hero at full stack development with
+        <a href="https://neog.camp">neog.camp</a>
+      </small>
+    </footer>
+    <script>
+      function calculateFuelCost() {
+        const distanceElement = document.getElementById("distance");
+        const fuelEfficiencyElement =
+          document.getElementById("fuel-efficiency");
+        const fuelPriceElement = document.getElementById("fuel-price");
+        const resultElement = document.getElementById("costResult");
+
+        const distanceInKms = parseFloat(distanceElement.value);
+        const fuelEfficiency = parseFloat(fuelEfficiencyElement.value);
+        const pricePerLitre = parseFloat(fuelPriceElement.value);
+
+        if (fuelEfficiency < 10) {
+          resultElement.innerText =
+            "Fuel Efficiency is very low, please visit service center.";
+          return;
+        }
+
+        const fuelNeeded = distanceInKms / fuelEfficiency;
+        const totalCost = fuelNeeded * pricePerLitre;
+
+        resultElement.innerText = "Total Fuel Cost: ₹" + totalCost.toFixed(2);
+      }
+
+      const calculateBtnElement = document.getElementById("calculateBtn");
+      calculateBtnElement.addEventListener("click", calculateFuelCost);
+    </script>
+  </body>
+</html>
